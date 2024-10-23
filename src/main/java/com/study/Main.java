@@ -6,14 +6,11 @@ import java.util.Stack;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int N = scanner.nextInt();
 
-        while (true) {
-            String s = scanner.nextLine();
-
-            if (s.equals(".")) {
-                break;
-            }
-            System.out.println(isBalanced(s) ? "yes" : "no");
+        for (int i = 0; i < N; i++) {
+            String s = scanner.next();
+            System.out.println(isBalanced(s) ? "YES" : "NO");
         }
     }
 
@@ -24,16 +21,12 @@ public class Main {
             char ch = s.charAt(i);
 
             // 여는 괄호
-            if (ch == '(' || ch == '[') {
+            if (ch == '(') {
                 stack.push(ch);
             }
             // 닫는 괄호일 경우
             else if (ch == ')') {
                 if (stack.isEmpty() || stack.pop() != '(') {
-                    return false;
-                }
-            } else if (ch == ']') {
-                if (stack.isEmpty() || stack.pop() != '[') {
                     return false;
                 }
             }
