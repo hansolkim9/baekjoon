@@ -7,31 +7,21 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
+        Stack<Integer> stack = new Stack<>();
 
         for (int i = 0; i < N; i++) {
-            String s = scanner.next();
-            System.out.println(isBalanced(s) ? "YES" : "NO");
-        }
-    }
-
-    public static boolean isBalanced(String s) {
-        Stack<Character> stack = new Stack<>();
-
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-
-            // 여는 괄호
-            if (ch == '(') {
-                stack.push(ch);
-            }
-            // 닫는 괄호일 경우
-            else if (ch == ')') {
-                if (stack.isEmpty() || stack.pop() != '(') {
-                    return false;
-                }
+            int a = scanner.nextInt();
+            if (a != 0) {
+                stack.push(a);
+            } else {
+                stack.pop();
             }
         }
 
-        return stack.isEmpty();
+        int sum = 0;
+        for (int num : stack) {
+            sum += num;
+        }
+        System.out.println(sum);
     }
 }
