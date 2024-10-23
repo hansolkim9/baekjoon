@@ -1,7 +1,5 @@
 package com.study;
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
@@ -9,18 +7,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
+        int result = -1;
 
-        Queue<Integer> queue = new LinkedList<>();
-
-        for (int i = 1; i <= N; i++) {
-            queue.add(i);
+        for (int i = N / 5; i >= 0; i--) {
+            int remainder = N - (i * 5);
+            if (remainder % 3 == 0) {
+                result = i + (remainder / 3);
+                break;
+            }
         }
-
-        while (queue.size() > 1) {
-            queue.poll();
-            queue.add(queue.poll());
-        }
-
-        System.out.println(queue.poll());
+        System.out.println(result);
     }
 }
