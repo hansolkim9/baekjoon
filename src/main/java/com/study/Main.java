@@ -1,29 +1,36 @@
 package com.study;
 
-import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        Stack<Integer> stack = new Stack<>();
+
         int N = scanner.nextInt();
-        HashMap<Integer, Integer> cardCount = new HashMap<>();
 
-        // 상근이의 숫자 카드 개수 저장
         for (int i = 0; i < N; i++) {
-            int num = scanner.nextInt();
-            cardCount.put(num, cardCount.getOrDefault(num, 0) + 1);
-        }
+            String s = scanner.next();
 
-        int M = scanner.nextInt();
-        StringBuilder result = new StringBuilder();
-
-        // 각 숫자의 개수를 빠르게 조회
-        for (int i = 0; i < M; i++) {
-            int num = scanner.nextInt();
-            result.append(cardCount.getOrDefault(num, 0)).append(" ");
+            switch (s) {
+                case "push":
+                    stack.push(scanner.nextInt());
+                    break;
+                case "pop":
+                    System.out.println(stack.isEmpty() ? -1 : stack.pop());
+                    break;
+                case "size":
+                    System.out.println(stack.size());
+                    break;
+                case "empty":
+                    System.out.println(stack.isEmpty() ? 1 : 0);
+                    break;
+                case "top":
+                    System.out.println(stack.isEmpty() ? -1 : stack.peek());
+                    break;
+            }
         }
-        System.out.println(result);
     }
 }
