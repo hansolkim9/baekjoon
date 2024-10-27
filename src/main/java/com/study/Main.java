@@ -8,35 +8,26 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        Queue<Integer> q = new LinkedList<>();
-
         int N = scanner.nextInt();
-        int last = -1;
+        int K = scanner.nextInt();
 
-        for (int i = 0; i < N; i++) {
-            String s = scanner.next();
+        Queue<Integer> q = new LinkedList<>();
+        StringBuilder result = new StringBuilder("<");
 
-            switch (s) {
-                case "push":
-                    last = scanner.nextInt();
-                    q.add(last);
-                    break;
-                case "pop":
-                    System.out.println(q.isEmpty() ? -1 : q.poll());
-                    break;
-                case "size":
-                    System.out.println(q.size());
-                    break;
-                case "empty":
-                    System.out.println(q.isEmpty() ? 1 : 0);
-                    break;
-                case "front":
-                    System.out.println(q.isEmpty() ? -1 : q.peek());
-                    break;
-                case "back":
-                    System.out.println(q.isEmpty() ? -1 : last);
-                    break;
+        for (int i = 1; i <= N; i++) {
+            q.add(i);
+        }
+
+        while (!q.isEmpty()) {
+            for (int i = 1; i < K; i++) {
+                q.add(q.poll());
+            }
+            result.append(q.poll());
+            if (!q.isEmpty()) {
+                result.append(", ");
             }
         }
+        result.append(">");
+        System.out.println(result);
     }
 }
