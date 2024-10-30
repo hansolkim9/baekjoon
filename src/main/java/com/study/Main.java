@@ -7,24 +7,13 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        String s = scanner.nextLine();
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int c = scanner.nextInt();
+        int d = scanner.nextInt();
 
-        switch (s) {
-            case "M":
-                System.out.println("MatKor");
-                break;
-            case "W":
-                System.out.println("WiCys");
-                break;
-            case "C":
-                System.out.println("CyKor");
-                break;
-            case "A":
-                System.out.println("AlKor");
-                break;
-            case "$":
-                System.out.println("$clear");
-                break;
-        }
+        int seconds = a+b+c+d;
+        System.out.println(seconds/60);
+        System.out.println(seconds%60);
     }
 }
