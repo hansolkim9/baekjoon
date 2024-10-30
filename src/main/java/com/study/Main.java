@@ -7,13 +7,24 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        int n = scanner.nextInt();
-        int h = scanner.nextInt();
-        int v = scanner.nextInt();
+        int T  = scanner.nextInt();
 
-        int x = Math.max(h, n-h);
-        int y = Math.max(v, n-v);
+        for (int i = 0; i < T; i++) {
 
-        System.out.println(x*y*4);
+            int N = scanner.nextInt();
+            int D = scanner.nextInt();
+            int count = 0;
+
+            for (int j = 0; j < N; j++) {
+                int vi = scanner.nextInt();
+                int fi = scanner.nextInt();
+                int ci = scanner.nextInt();
+
+                if (fi >= ci*D/vi) {
+                    count++;
+                }
+            }
+            System.out.println(count);
+        }
     }
 }
