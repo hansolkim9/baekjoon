@@ -1,28 +1,23 @@
 package com.study;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int T  = scanner.nextInt();
+        while (scanner.hasNextInt()) {
+            int n = scanner.nextInt();
+            int k = scanner.nextInt();
+            int p = 0;
 
-        for (int i = 0; i < T; i++) {
+            int count = n;
 
-            int N = scanner.nextInt();
-            int D = scanner.nextInt();
-            int count = 0;
+            while (n >= k) {
+                p = n/k; // 시켜먹을 수 있는 치킨의 수(추가될 쿠폰의 수)
+                n = p + n%k; // 남은 도장 개수
 
-            for (int j = 0; j < N; j++) {
-                int vi = scanner.nextInt();
-                int fi = scanner.nextInt();
-                int ci = scanner.nextInt();
-
-                if (fi >= ci*D/vi) {
-                    count++;
-                }
+                count += p;
             }
             System.out.println(count);
         }
