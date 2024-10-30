@@ -7,9 +7,24 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
+        String s = scanner.nextLine();
 
-        System.out.println(A * B);
+        switch (s) {
+            case "M":
+                System.out.println("MatKor");
+                break;
+            case "W":
+                System.out.println("WiCys");
+                break;
+            case "C":
+                System.out.println("CyKor");
+                break;
+            case "A":
+                System.out.println("AlKor");
+                break;
+            case "$":
+                System.out.println("$clear");
+                break;
+        }
     }
 }
