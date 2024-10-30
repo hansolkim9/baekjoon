@@ -7,9 +7,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        int N = scanner.nextInt();
-        int n = N/4;
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
 
-        System.out.println("long ".repeat(n) + "int");
+        System.out.println(A * B);
     }
 }
