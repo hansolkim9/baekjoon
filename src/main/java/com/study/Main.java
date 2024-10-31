@@ -1,61 +1,45 @@
 package com.study;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int T = scanner.nextInt(); // 테스트 케이스
+        int N = scanner.nextInt();
+        int sum = 0;
+        int[] arr = new int[N];
 
-        for (int i = 0; i < T; i++) {
-            int N = scanner.nextInt(); // 문서 개수
-            int M = scanner.nextInt(); // 찾는 문서 위치
-            Queue<Document> queue = new LinkedList<>();
-            int maxPriority = 0; // 현재 최대 중요도 추적
+        for (int i = 0; i < N; i++) {
+            arr[i] = scanner.nextInt();
+            sum += arr[i];
+        }
+        Arrays.sort(arr);
 
-            for (int j = 0; j < N; j++) {
-                int priority = scanner.nextInt();
-                queue.add(new Document(j, priority));
-                maxPriority = Math.max(maxPriority, priority); // 최대 중요도 갱신
-            }
+        // 최빈값 계산
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : arr) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
 
-            int printOrder = 0; // 출력순서
+        // 가장 높은 빈도 찾기
+        int maxFrequency = Collections.max(frequencyMap.values());
 
-            // 인쇄 순서 결정
-            while (!queue.isEmpty()) {
-                Document current = queue.poll();
-
-                // 더 높은 중요도 있는지 확인
-                boolean hasHigherPriority = false;
-                for (Document doc : queue) {
-                    if (doc.priority > current.priority) {
-                        hasHigherPriority = true;
-                        break;
-                    }
-                }
-
-                if (hasHigherPriority) {
-                    queue.add(current);
-                } else {
-                    printOrder++;
-                    if (current.index == M) {
-                        System.out.println(printOrder);
-                        break;
-                    }
-                }
+        // 빈도가 maxFrequency인 숫자들을 모으기
+        List<Integer> modeList = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            if (entry.getValue() == maxFrequency) {
+                modeList.add(entry.getKey());
             }
         }
-    }
-}
 
-class Document {
-    int index, priority;
+        // 최빈값이 여러 개일 경우 두 번째로 작은 값 선택
+        Collections.sort(modeList);
+        int mode = (modeList.size() > 1) ? modeList.get(1) : modeList.get(0);
 
-    public Document(int index, int priority) {
-        this.index = index;
-        this.priority = priority;
+        System.out.println((int) Math.round((double) sum/N)); // 산술평균
+        System.out.println(arr[(N-1)/2]); // 중앙값
+        System.out.println(mode); // 최빈값
+        System.out.println(arr[N-1] - arr[0]); // 범위
     }
 }
