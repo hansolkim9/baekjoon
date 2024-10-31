@@ -1,36 +1,61 @@
 package com.study;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int M = scanner.nextInt();
-        int N = scanner.nextInt();
+        int T = scanner.nextInt(); // 테스트 케이스
 
-        // 소수 판별을 위한 배열 초기화
-        boolean[] isPrime = new boolean[N + 1];
-        for (int i = 2; i <= N; i++) {
-            isPrime[i] = true; // 모든 수를 소수로 가정
-        }
+        for (int i = 0; i < T; i++) {
+            int N = scanner.nextInt(); // 문서 개수
+            int M = scanner.nextInt(); // 찾는 문서 위치
+            Queue<Document> queue = new LinkedList<>();
+            int maxPriority = 0; // 현재 최대 중요도 추적
 
-        // 에라토스테네스의 체 알고리즘 적용
-        for (int i = 2; i * i <= N; i++) {
-            if (isPrime[i]) {
-                for (int j = i * i; j <= N; j += i) {
-                    isPrime[j] = false;  // 소수가 아닌 수는 false로 설정
+            for (int j = 0; j < N; j++) {
+                int priority = scanner.nextInt();
+                queue.add(new Document(j, priority));
+                maxPriority = Math.max(maxPriority, priority); // 최대 중요도 갱신
+            }
+
+            int printOrder = 0; // 출력순서
+
+            // 인쇄 순서 결정
+            while (!queue.isEmpty()) {
+                Document current = queue.poll();
+
+                // 더 높은 중요도 있는지 확인
+                boolean hasHigherPriority = false;
+                for (Document doc : queue) {
+                    if (doc.priority > current.priority) {
+                        hasHigherPriority = true;
+                        break;
+                    }
+                }
+
+                if (hasHigherPriority) {
+                    queue.add(current);
+                } else {
+                    printOrder++;
+                    if (current.index == M) {
+                        System.out.println(printOrder);
+                        break;
+                    }
                 }
             }
         }
+    }
+}
 
-        // M 이상 N 이하의 소수 출력
-        StringBuilder result = new StringBuilder();
-        for (int i = M; i <= N; i++) {
-            if (isPrime[i]) {
-                result.append(i).append("\n");
-            }
-        }
-        System.out.print(result);
+class Document {
+    int index, priority;
+
+    public Document(int index, int priority) {
+        this.index = index;
+        this.priority = priority;
     }
 }
