@@ -1,35 +1,39 @@
 package com.study;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int N = scanner.nextInt(); // 도감에 있는 포켓몬 개수
-        int M = scanner.nextInt(); // 맞춰야 하는 문제 개수
-
+        int N = scanner.nextInt(); // 듣도 못한 사람
+        int M = scanner.nextInt(); // 보도 못한 사람
         Map<String, Integer> map = new HashMap<>();
-        String[] array = new String[N];
 
         for (int i = 0; i < N; i++) {
-            String poketmon = scanner.next();
-            map.put(poketmon, i+1);
-            array[i] = poketmon;
+            map.put(scanner.next(), 0);
         }
 
-        for (int i = 0; i < M; i++) {
-            String question = scanner.next();
-
-            // question이 숫자인지 확인
-            try {
-                int number = Integer.parseInt(question); // 숫자로 변환 시도
-                System.out.println(array[number - 1]); // 배열에서 이름을 찾음
-            } catch (NumberFormatException e) {
-                System.out.println(map.get(question)); // 해시맵에서 번호를 찾음
+        for (int j = 0; j < M; j++) {
+            String name = scanner.next();
+            if (map.containsKey(name)) { // 듣도 못한 사람 중 보도 못한 사람만 카운트 증가
+                map.put(name, 1); // 값을 1로 설정해 듣도 보도 못한 사람 표시
             }
+        }
+
+        // 값이 1인 키를 list에 추가
+        List<String> resultList = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 1) {
+                resultList.add(entry.getKey());
+            }
+        }
+
+        // 리스트 정렬 및 출력
+        Collections.sort(resultList);
+        System.out.println(resultList.size());
+        for (String name : resultList) {
+            System.out.println(name);
         }
     }
 }
