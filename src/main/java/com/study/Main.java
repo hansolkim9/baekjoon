@@ -1,43 +1,41 @@
 package com.study;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int K = scanner.nextInt();
-        int N = scanner.nextInt();
-        int[] lengths = new int[K];
-        long max = 0;
-
-        for (int i = 0; i < K; i++) {
-            lengths[i] = scanner.nextInt();
-            if (lengths[i] > max) {
-                max = lengths[i];
-            }
+        int n = scanner.nextInt();
+        int[] sequence = new int[n];
+        for (int i = 0; i < n; i++) {
+            sequence[i] = scanner.nextInt();
         }
 
-        long left = 1;
-        long right = max;
-        long result = 0;
+        Stack<Integer> stack = new Stack<>();
+        StringBuilder result = new StringBuilder();
+        int current = 1;
 
-        while (left <= right) {
-            long mid = (left + right) / 2;
-            long count = 0;
+        for (int i = 0; i < n; i++) {
+            int target = sequence[i];
 
-            for (int length : lengths) {
-                count += length / mid;
+            // target에 도달할때까지 push
+            while (current <= target) {
+                stack.push(current);
+                result.append("+\n");
+                current++;
             }
 
-            if (count >= N) {
-                result = mid;
-                left = mid + 1;
+            // stack의 최상단값이 target인지 확인
+            if (stack.peek() == target) {
+                stack.pop();
+                result.append("-\n");
             } else {
-                right = mid - 1;
+                System.out.println("NO");
+                return;
             }
         }
-
-        System.out.println(result);
+        System.out.println(result.toString());
     }
 }
