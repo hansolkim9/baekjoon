@@ -1,29 +1,31 @@
 package com.study;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int N = scanner.nextInt();
-        int[] time = new int[N];
+        int N = scanner.nextInt(); // 저장할 사이트 수
+        int M = scanner.nextInt(); // 찾을 사이트 수
+        scanner.nextLine(); // 개행 문자 처리
+
+        Map<String, String> passwordMap = new HashMap<>();
 
         for (int i = 0; i < N; i++) {
-            time[i] = scanner.nextInt();
+            String site = scanner.next();
+            String password = scanner.next();
+            passwordMap.put(site, password);
         }
 
-        Arrays.sort(time);
-        int sum = 0;
-        for (int i = 0; i < N; i++) {
-            sum += time[i];
-            time[i] = sum;
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < M; i++) {
+            String site = scanner.next();
+            result.append(passwordMap.get(site)).append("\n");
         }
-        sum = 0;
-        for (int i = 0; i < N; i++) {
-            sum += time[i];
-        }
-        System.out.println(sum);
+
+        System.out.print(result.toString());
     }
 }
