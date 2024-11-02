@@ -1,31 +1,31 @@
 package com.study;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int N = scanner.nextInt(); // 저장할 사이트 수
-        int M = scanner.nextInt(); // 찾을 사이트 수
-        scanner.nextLine(); // 개행 문자 처리
+        int T = scanner.nextInt();
 
-        Map<String, String> passwordMap = new HashMap<>();
+        int[][] dp = new int[41][2];
+        dp[0][0] = 1;
+        dp[0][1] = 0;
+        dp[1][0] = 0;
+        dp[1][1] = 1;
 
-        for (int i = 0; i < N; i++) {
-            String site = scanner.next();
-            String password = scanner.next();
-            passwordMap.put(site, password);
+        // 채우기
+        for (int i = 2; i <= 40; i++) {
+            dp[i][0] = dp[i - 1][0] + dp[i - 2][0];
+            dp[i][1] = dp[i - 1][1] + dp[i - 2][1];
         }
 
+        // 테스트 케이스 입력 및 출력
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < M; i++) {
-            String site = scanner.next();
-            result.append(passwordMap.get(site)).append("\n");
+        for (int i = 0; i < T; i++) {
+            int n = scanner.nextInt();
+            result.append(dp[n][0]).append(" ").append(dp[n][1]).append("\n");
         }
-
-        System.out.print(result.toString());
+        System.out.print(result);
     }
 }
