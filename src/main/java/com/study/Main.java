@@ -7,26 +7,17 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
-        int A = scanner.nextInt();
-        int B = scanner.nextInt();
+        int H = scanner.nextInt();
+        int result = 0;
 
-        int onionP = 1;
-        int onionN = 1;
+        for (int i = 0; i < N; i++) {
+            int a = scanner.nextInt();
 
-        for (int i = 1; i <= N; i++) {
-            int c = 0;
-            onionP += A;
-            onionN += B;
-
-            if (onionN > onionP) {
-                c = onionP;
-                onionP = onionN;
-                onionN = c;
-            } else if (onionN == onionP) {
-                onionN -= 1;
+            if (H >= a) {
+                result++;
             }
         }
 
-        System.out.println(onionP + " " + onionN);
+        System.out.println(result);
     }
 }
