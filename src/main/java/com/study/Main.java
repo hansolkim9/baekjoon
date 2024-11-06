@@ -6,21 +6,27 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int T = scanner.nextInt();
-        System.out.println("Gnomes:");
+        int N = scanner.nextInt();
+        int A = scanner.nextInt();
+        int B = scanner.nextInt();
 
-        for (int i = 0; i < T; i++) {
-            int a = scanner.nextInt();
-            int b = scanner.nextInt();
-            int c = scanner.nextInt();
+        int onionP = 1;
+        int onionN = 1;
 
-            if (a>=b && b>c) {
-                System.out.println("Ordered");
-            } else if (a<=b && b<=c) {
-                System.out.println("Ordered");
-            } else {
-                System.out.println("Unordered");
+        for (int i = 1; i <= N; i++) {
+            int c = 0;
+            onionP += A;
+            onionN += B;
+
+            if (onionN > onionP) {
+                c = onionP;
+                onionP = onionN;
+                onionN = c;
+            } else if (onionN == onionP) {
+                onionN -= 1;
             }
         }
+
+        System.out.println(onionP + " " + onionN);
     }
 }
