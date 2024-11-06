@@ -6,13 +6,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        int N = scanner.nextInt();
-        int M = scanner.nextInt();
+        int red = scanner.nextInt();
+        int green = scanner.nextInt();
+        int blue = scanner.nextInt();
 
-        if (100*N >= M) {
-            System.out.println("Yes");
-        } else {
-            System.out.println("No");
-        }
+        System.out.println(3*red + 4*green + 5*blue);
     }
 }
